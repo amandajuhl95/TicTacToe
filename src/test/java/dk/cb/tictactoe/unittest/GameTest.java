@@ -2,9 +2,9 @@ package dk.cb.tictactoe.unittest;
 
 import dk.cb.tictactoe.Game;
 import dk.cb.tictactoe.Move;
+import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import java.io.*;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -50,13 +50,19 @@ public class GameTest {
     }
 
     @Test
-    public void mustReturnInfoWhenFieldAlreadyIsFilled() {
+    public void mustReturnInfoWhenSlotAlreadyIsFilled() {
         game.makeHumanMove(5);
         assertEquals(". . .\n. O .\n. . .", outputStream.toString().trim());
 
         boolean result = game.makeHumanMove(5);
         assertFalse(result);
         assertEquals(". . .\n. O .\n. . .\nSlot already taken. Re-enter slot number", outputStream.toString().trim());
+    }
+
+    @Test
+    public void mustReturnInfoWhenWrongSlotIsEntered() {
+        game.makeHumanMove(10);
+        assertEquals("Slot needs to be between 1 and 9. Try again.", outputStream.toString().trim());
     }
 
     @Test
@@ -100,19 +106,32 @@ public class GameTest {
     }
 
     @Test
+    public void mustReturnWinnerWhenXOrO() {
+        assertEquals("Game ended, the winner is X", game.findWinner("X"));
+    }
+
+    @Test
+    public void mustReturnTieWhenNoWinnerIsFound() {
+        assertEquals("Game ended, it was a tie", game.findWinner("Tie"));
+    }
+
+    @Test
+    public void mustReturnCountOfEmptyCells() {
+        String[] fakeBoard = {"O", "O", ".", ".", ".", "O", ".", "X", "X"};
+        assertEquals(4, game.countEmptyCells(fakeBoard));
+    }
+
+    @Ignore
+    @Test
     public void playTheGameAndEndInTieWhenCallingStart() throws InterruptedException {
 
         String winner = game.start();
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println(5);
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println(3);
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println(4);
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println(8);
+        provideInput("5");
+        provideInput("3");
+        provideInput("4");
+        provideInput("8");
 
-        assertEquals("Game ended it, it was a tie", winner);
+        assertEquals("Game ended it, was a tie", winner);
 
     }
 

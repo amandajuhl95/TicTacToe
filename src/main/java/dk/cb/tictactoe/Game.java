@@ -1,5 +1,6 @@
 package dk.cb.tictactoe;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,11 +11,15 @@ public class Game {
     private String[] board;
     private String human = "O";
     private String AI = "X";
+    private String winner = null;
+    private int emptyCells;
+
     private Scanner in = new Scanner(System.in);
 
     public Game() {
         this.board = new String[9];
         Arrays.fill(board, ".");
+        this.emptyCells = this.board.length;
     }
 
     public void printBoard() {
@@ -148,9 +153,6 @@ public class Game {
     }
 
     public String start() {
-        String result = "";
-        String winner = null;
-        int emptyCells = board.length;
 
         while (emptyCells > 0 && winner == null) {
             if(emptyCells % 2 == 1) {
@@ -164,20 +166,16 @@ public class Game {
                     validMove = makeHumanMove(position);
                 }
             }
-
             // Check if someone wins already, update the flag
             winner = wonBy(board);
-
-            // Count how many empty cells left
-            int count = 0;
-            for(String slot : board) {
-                if(slot.equals(".")) {
-                    count++;
-                }
-            }
-            emptyCells = count;
-
+            emptyCells = countEmptyCells(board);
         }
+        return findWinner(winner);
+    }
+
+    public String findWinner(String winner) {
+
+        String result = "";
 
         if(winner.equals("Tie")) {
             result = "Game ended, it was a tie";
@@ -187,8 +185,19 @@ public class Game {
 
         System.out.println(result);
         return result;
-
     }
+
+    public int countEmptyCells(String[] board) {
+        // Count how many empty cells left
+        int count = 0;
+        for(String slot : board) {
+            if(slot.equals(".")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 
 }
 
