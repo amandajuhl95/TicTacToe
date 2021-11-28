@@ -34,6 +34,9 @@ verify(mock, times(wantedNumberOfInvocations)).someMethod();
 We verify that the Mockito.mock has been called a specific number of times (wantedNumberOfInvocations) with a method someMethod().
 
 ##### How do you verify that a mock was called with specific arguments?
+
+If the mock takes simple types as argument:
+
 ```
 Import static org.mockito.Mockito.verify;
 Import static org.mockito.Mockito.eq;
@@ -41,24 +44,22 @@ Import static org.mockito.Mockito.eq;
 verify(mock)).someMethod(eq(“first”));
 ```
 
-or 
-
-For Objects as argument
+or if it takes Objects as argument:
 
 ```
 Import static org.mockito.Mockito.verify;
 Import static org.mockito.Mockito.ArgumentCaptor;
 
 ArgumentCaptor<T> captor = ArgumentCaptor.forClass(T.class);
+```
 
 We verify that the Mockito.mock has been called a with a method someMethod() with specific arguments.
 
-
+```
 verify(mock)).someMethod(captor.capture());
 assertTrue(captor.getAllValues().get(0) == “first”);
 assertTrue(captor.getAllValues().get(1) == “second”);
-![image](https://user-images.githubusercontent.com/47500265/143779474-b1ae4f60-5497-45cd-b502-82fbee4c110c.png)
-
+```
 
 ##### How do you use a predicate to verify the properties of the arguments given to a call to the mock?
 
