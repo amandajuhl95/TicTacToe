@@ -121,19 +121,19 @@ public class GameTest {
         assertEquals(4, game.countEmptyCells(fakeBoard));
     }
 
-    @Ignore
-    @Test
-    public void playTheGameAndEndInTieWhenCallingStart() throws InterruptedException {
-
-        String winner = game.start();
-        provideInput("5");
-        provideInput("3");
-        provideInput("4");
-        provideInput("8");
-
-        assertEquals("Game ended it, was a tie", winner);
-
-    }
+//    @Disabled
+//    @Test
+//    public void playTheGameAndEndInTieWhenCallingStart() {
+//
+//        String winner = game.start();
+//        provideInput("5");
+//        provideInput("3");
+//        provideInput("4");
+//        provideInput("8");
+//
+//        assertEquals("Game ended it, was a tie", winner);
+//
+//    }
 
 
 }
