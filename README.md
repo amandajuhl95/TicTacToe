@@ -79,9 +79,14 @@ We verify that the Mockito.mock has been called a with a method someMethod() wit
 
 We have decided to make Tic Tac Toe in Java with an AI that uses MiniMax. For this we have used:
 
-- Jacoco as coverage report
-- PITest as mutation testing
-- FindSpots as static analysis 
+- PITest for mutation testing
+- Jacoco for coverage report
+
+<img width="739" alt="Skærmbillede 2021-11-28 kl  19 16 14" src="https://user-images.githubusercontent.com/47500265/143780714-844b76b9-d4cb-475b-b927-aef0906f9c17.png">
+
+- FindSpots for static analysis 
+
+<img width="994" alt="Skærmbillede 2021-11-28 kl  19 19 05" src="https://user-images.githubusercontent.com/47500265/143780821-162f7334-3677-41c1-83ec-6857b602b5e0.png">
 
 
 
